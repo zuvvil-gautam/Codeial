@@ -18,9 +18,36 @@ module.exports.signUp = function(req,res){
 }
 
 //get the sign up data
-module.exports.create = function(req,res){
-    //todo later
-}
+
+module.exports.create = function (req, res) {
+    if (req.body.password !== req.body.confirm_password) {
+        res.redirect('back');
+    }
+
+    const findUser = (query) => {
+        return User.findOne(query).exec();
+    };
+
+    const createUser = (userData) => {
+        return User.create(userData);
+    };
+
+    findUser({ email: req.body.email })
+        .then((user) => {
+            if (!user) {
+                return createUser(req.body);
+            } else {
+                return Promise.reject('User already exists');
+            }
+        })
+        .then(() => {
+            return res.redirect('/user/sign-in');
+        })
+        .catch((err) => {
+            console.error('Error in creating user while signing up:', err);
+            return res.status(500).send('Error creating user. Please try again later.');
+        });
+};
 
 module.exports.createSession = function(req,res){
     //todo later
