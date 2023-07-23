@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
 const app = express();
 
 const port = 8000;
@@ -8,6 +10,7 @@ const expressLayouts = require('express-ejs-layouts');
 
 const db = require('./config/mongoose');
 
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //for static files such as css,js
