@@ -1,27 +1,42 @@
 const User = require('../models/user');
 
-module.exports.profile = function(req,res){
+module.exports.profile = function (req, res) {
+    if (req.cookies.user_id) {
+        // Check if 'user_id' cookie exists in the request
+        // If it exists, we assume the user is authenticated
 
-    if(req.cookies.user_id){
         User.findById(req.cookies.user_id)
-            .then(user =>{
-                if(user){
-                    res.render('userProfile',{
+            .then((user) => {
+                // Try to find the user in the database by their 'user_id'
+
+                if (user) {
+                    // If the user is found in the database, render the 'userProfile' view template
+                    // with the user data
+
+                    res.render('userProfile', {
                         title: "User Profile",
                         user: user
-                    })
-                }else{
+                    });
+                } else {
+                    // If the user is not found in the database, redirect to the sign-in page
+
                     res.redirect('/user/sign-in');
                 }
             })
             .catch((err) => {
+                // If any error occurs during the database query (findById), handle it here
+
                 console.log('Error in finding user:', err);
                 res.redirect('/user/sign-in');
             });
     } else {
+        // If the 'user_id' cookie is not present in the request, it means the user is not authenticated,
+        // so redirect them to the sign-in page
+
         res.redirect('/user/sign-in');
     }
 };
+
 
 //render the sign in page
 module.exports.signIn = function(req,res){
