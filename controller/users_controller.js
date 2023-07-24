@@ -9,7 +9,7 @@ module.exports.profile = function (req, res) {
             .then((user) => {
                 // Try to find the user in the database by their 'user_id'
 
-                if (user) {
+                if (user) { 
                     // If the user is found in the database, render the 'userProfile' view template
                     // with the user data
 
