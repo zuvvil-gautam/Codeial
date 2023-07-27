@@ -84,33 +84,6 @@ module.exports.create = function (req, res) {
 };
 
 
-module.exports.createSession = function (req, res) {
-
-    const findUser = (query) => {
-        return User.findOne(query).exec();
-    }
-
-    findUser({email: req.body.email})
-        .then((user) => {
-
-            if(user){
-
-                    if(user.password != req.body.password){
-                        res.redirect('back');
-                }
-                
-                //handle session creation
-                res.cookie('user_id', user.id);
-                res.redirect('/user/profile');;
-            
-            }else{
-                res.redirect('back');
-            }
-
-        }) 
-        .catch(err => {
-             console.log('error in finding user in signing in'); return 
-
-        })
-
+module.exports.createSession = function(req,res){
+    res.redirect('/');
 }
