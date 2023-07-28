@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const postsController = require('../controller/postsController');
+const postsController = require('../controller/posts_controller');
 
-router.get('/firstpost', postsController.posts);
+router.post('/create', postsController.create);
 
 module.exports = router;
