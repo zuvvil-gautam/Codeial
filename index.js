@@ -8,6 +8,8 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
 
+
+
 const app = express();
 
 const port = 8000;
@@ -15,6 +17,8 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 
 const db = require('./config/mongoose');
+
+
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -1,5 +1,7 @@
 module.exports.home = function(req,res){
-    res.send("<h1>Hello Zuvvil</h1>");
+    res.render('home',{
+        title: 'Home Page'
+    });
 }
 
 //module.exports.actionName = function(req,res){}
