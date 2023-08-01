@@ -1,10 +1,21 @@
 const User = require('../models/user');
 
 module.exports.profile = function (req, res) {
-    res.render('userProfile',{
-        title:"User Profile"
-    })
-}
+    User.findById(req.params.id)
+        .exec()
+        .then(user => {
+            return res.render('user_profile', {
+                title: 'User Profile',
+                profile_user: user
+            });
+        })
+        .catch(err => {
+            console.log("Error:", err);
+            return res.status(500).send("Internal Server Error");
+        });
+};
+
+
 
 
 //render the sign in page
