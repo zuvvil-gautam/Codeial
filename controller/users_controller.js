@@ -15,6 +15,22 @@ module.exports.profile = function (req, res) {
         });
 };
 
+module.exports.update = function (req, res) {
+    if (req.user.id == req.params.id) {
+        User.findByIdAndUpdate(req.params.id, req.body)
+            .exec()
+            .then(user => {
+                return res.redirect('back');
+            })
+            .catch(err => {
+                console.log("Error:", err);
+                return res.status(500).send("Internal Server Error");
+            });
+    } else {
+        return res.status(401).send('Unauthorized');
+    }
+};
+
 
 
 
