@@ -7,8 +7,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
-
-
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 const app = express();
 
@@ -67,6 +67,8 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash());
+app.use(customMware.setFlash);
 //use express router
 app.use('/', require('./routes'));
 

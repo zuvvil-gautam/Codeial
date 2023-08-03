@@ -88,6 +88,7 @@ module.exports.create = function (req, res) {
 
 
 module.exports.createSession = function(req,res){
+    req.flash('success', 'Logged in Successfully');
     res.redirect('/user/profile/' + req.user.id);
 }
 
@@ -97,6 +98,8 @@ module.exports.destroySession = function (req, res) {
         if (err) {
             console.log('Error while logging out:', err);
         }
+
+        req.flash('success', 'You have logged out!');
         return res.redirect('/');
     });
 };
