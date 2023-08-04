@@ -23,20 +23,18 @@
     <%- script %>
 
     <script>
-        <% if (flash.success && flash.success.length > 0) { %>
-
+        <% if(flash.success && flash.success.length > 0) { %>
         new Noty({
             theme: 'relax',
             text: '<%= flash.success %>',
             type:'success',
             timeout: 1500,
-            layout: "topRight"
+            layout: 'topRight'
             
         }).show();
     <% } %>
 
-    <% if (flash.success && flash.success.length > 0) { %>
-
+    <% if (flash.error && flash.error.length > 0) { %>
         new Noty({
             theme: 'relax',
             text: '<%= flash.error %>',

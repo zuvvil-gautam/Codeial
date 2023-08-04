@@ -20,6 +20,7 @@ module.exports.update = function (req, res) {
         User.findByIdAndUpdate(req.params.id, req.body)
             .exec()
             .then(user => {
+                req.flash('success', 'Profile updated!');
                 return res.redirect('back');
             })
             .catch(err => {
@@ -56,9 +57,9 @@ module.exports.signUp = function(req,res){
 
 //get the sign up data
 
-module.exports.create = function (req, res) {
+module.exports.create = async function (req, res) {
     if (req.body.password !== req.body.confirm_password) {
-        res.redirect('back');
+        return res.redirect('back');
     }
 
     const findUser = (query) => {
@@ -69,21 +70,22 @@ module.exports.create = function (req, res) {
         return User.create(userData);
     };
 
-    findUser({ email: req.body.email })
-        .then((user) => {
-            if (!user) {
-                return createUser(req.body);
-            } else {
-                return Promise.reject('User already exists');
-            }
-        })
-        .then(() => {
+    try {
+        const user = await findUser({ email: req.body.email });
+
+        if (!user) {
+            await createUser(req.body);
+            req.flash('success', 'Sign up completed!');
             return res.redirect('/user/sign-in');
-        })
-        .catch((err) => {
-            console.error('Error in creating user while signing up:', err);
-            return res.status(500).send('Error creating user. Please try again later.');
-        });
+        } else {
+            //throw new Error('User already exists');
+            req.flash('error','Email already exists!')
+            return res.redirect('back');
+        }
+    } catch (err) {
+        req.flash('error',err);
+        return res.status(500).send('Error creating user. Please try again later.');
+    }
 };
 
 
