@@ -1,6 +1,7 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 const User = require('../models/user');
+const commentsMailer = require('../mailers/comments_mailer');
 
 module.exports.create = async function (req, res) {
     try{
@@ -19,15 +20,20 @@ module.exports.create = async function (req, res) {
                 user: req.user._id
             });
             
-            post.comments.push(comment);
-            post.save();
+           
 
             // Fetch the user's name and attach it to the comment
             let user = await User.findById(req.user._id);
             comment.user = {
                 _id: user._id,
-                name: user.name
+                name: user.name,
+                email: user.email
             };
+
+            post.comments.push(comment);
+            post.save();
+
+            commentsMailer.newComment(comment);
             if(req.xhr)
             {
                 //Similar for comments to fetch the user's id!
