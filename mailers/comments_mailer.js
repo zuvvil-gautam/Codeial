@@ -4,7 +4,8 @@ const nodemailer = require('../config/nodemailer');
 exports.newComment = (comment) => {
 
     let htmlString = nodemailer.renderTemplate({comment: comment}, '/comments/new_comment.ejs');
-  
+    
+    console.log('Inside newComment Mailer');
     // If all checks pass, send the email
     nodemailer.transporter.sendMail(
         {

@@ -1,19 +1,27 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const queue = require('../config/kue');
+const userEmailWorker = require('../workers/user_email_worker');
 
 module.exports.profile = function (req, res) {
+
     User.findById(req.params.id)
         .exec()
         .then(user => {
+
             return res.render('user_profile', {
                 title: 'User Profile',
                 profile_user: user
+
             });
         })
         .catch(err => {
+
             console.log("Error:", err);
             return res.status(500).send("Internal Server Error");
+            
         });
 };
 
@@ -131,3 +139,100 @@ module.exports.destroySession = function (req, res) {
     });
 };
 
+
+module.exports.resetPassword = function(req,res){
+    return res.render('reset_password',{
+        title:'Codeial | Reset Password',
+        access: false
+    });
+}
+
+module.exports.resetPassMail = async function (req, res) {
+    try {
+        const user = await User.findOne({ email: req.body.email }).exec();
+
+        if (!user) {
+            req.flash('error', 'User not found. Try again!');
+            return res.redirect('back');
+        }
+
+        if (!user.isTokenValid) {
+            user.accessToken = crypto.randomBytes(30).toString('hex');
+            user.isTokenValid = true;
+            await user.save();
+        }
+
+        let job = queue.create('user-emails', user).save(function (err) {
+            if (err) {
+                console.log('Error in sending to the queue', err);
+                return;
+            }
+            // console.log('Job enqueued', job.id);
+        });
+
+        req.flash('success', 'Password reset link sent. Please check your mail');
+        return res.redirect('/');
+    } catch (err) {
+        console.log('Error in finding user', err);
+        req.flash('error', 'An error occurred. Please try again later.');
+        return res.redirect('back');
+    }
+};
+
+
+module.exports.setPassword = async function (req, res) {
+    try {
+        const user = await User.findOne({ accessToken: req.params.accessToken }).exec();
+
+        if (!user) {
+            console.log('User not found');
+            return;
+        }
+
+        if (user.isTokenValid) {
+            return res.render('reset_password', {
+                title: 'Codeial | Reset Password',
+                access: true,
+                accessToken: req.params.accessToken
+            });
+        } else {
+            req.flash('error', 'Link expired');
+            return res.redirect('/user/reset-password');
+        }
+    } catch (err) {
+        console.log('Error in finding user', err);
+        return;
+    }
+};
+
+
+module.exports.updatePassword = async function (req, res) {
+    try {
+        const user = await User.findOne({ accessToken: req.params.accessToken }).exec();
+
+        if (!user) {
+            console.log('User not found');
+            return;
+        }
+
+        if (user.isTokenValid) {
+            if (req.body.newPass == req.body.confirmPass) {
+                user.password = req.body.newPass;
+                user.isTokenValid = false;
+                await user.save();
+            } else {
+                req.flash('error', "Passwords don't match");
+                return res.redirect('back');
+            }
+        } else {
+            req.flash('error', 'Link expired');
+            return res.redirect('/user/reset-password');
+        }
+
+        req.flash('success', "Password updated. Login now!");
+        return res.redirect('/user/sign-in');
+    } catch (err) {
+        console.log('Error in finding user', err);
+        return;
+    }
+};
