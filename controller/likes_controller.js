@@ -28,19 +28,19 @@ module.exports.toggleLike = async function(req,res){
             likeable.likes.pull(existingLike._id);
             likeable.save();
 
-            existingLike.remove();
+            existingLike.deleteOne();
             deleted = true;
         }
 
         else{
             //else make a new like
             let newLike = await Like.create({
-                user: req.query._id,
+                user: req.user._id,
                 likeable: req.query.id,
                 onModel: req.query.type
             });
 
-            likeable.likes.push(newLike);
+            likeable.likes.push(newLike._id);
             likeable.save();
         }
 
