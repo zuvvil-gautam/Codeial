@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="/css/user_profile.css">
+
+<div class="box">
+
 <h1>Social/ UserProfile</h1>
 
 <img src="<%= user.avatar %>" alt="<%= user.name %>" width="200">
@@ -6,7 +9,7 @@
 <% if (user.id == profile_user.id){  %>
     <!-- if user matches then show the form-->
 
-    <form action="/user/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+    <form action="/user/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST" class="form">
         <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
         <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
 
@@ -15,9 +18,11 @@
     </form>
  <% } else { %>
     <!--else show only the profile info-->
-    <p>Name: <%= profile_user.name %>
+    <p class="user-profile-data">Name: <%= profile_user.name %>
     </p>
-    <p>Email: <%= profile_user.email %>
+    <p class="user-profile-data">Email: <%= profile_user.email %>
     </p>
 
 <%} %>
+
+</div>

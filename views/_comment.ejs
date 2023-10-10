@@ -1,8 +1,10 @@
-<li id="comment-<%= comment._id  %>">
 
-    <p>
+<link rel="stylesheet" href="/css/_comment.css">
+
+<li class="each-comment" id="comment-<%= comment._id  %>">
+    <p class="each-comment-text">
         <% if (locals.user && locals.user.id==comment.user.id) { %>
-            <small>
+            <small class="small-delete">
             
             <a href="/comments/destroy/<%= comment.id %>" class="delete-comment-button">X</a>
             </small>
@@ -10,7 +12,7 @@
 
             <%= comment.content %>
             <br>
-            <small>
+            <small class="small-text">
                 <%= comment.user.name %>
             </small>
                     <br>
