@@ -42,15 +42,19 @@
 
     let newPostDom = function(post){
         //show the count of zero likes on this post
-        return $(`<li id="post-${ post._id }">
-            <p>
-                    <small>
+        return $(`<li class="each-post" id="post-${ post._id }">
+            <p class="each-post-text">
+
+            <% if (locals.user && locals.user.id == post.user.id) { %>
+                    <small class="small-delete">
                         <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
                     </small>
+
+                    <% } %>
                     
                         ${ post.content }
                             <br>
-                            <small>
+                            <small class="small-text">
                                 ${ post.user.name }
                             </small>
 
@@ -64,13 +68,14 @@
             </p>
             <div class="post-comments">
 
-                
-
-                    <form id="post-${post._id}-comments-form" action="/comments/create" method="POST">
+            if(locals.user){ %>
+                    <form id="post-${post._id}-comments-form" action="/comments/create" class="comment-form" method="POST">
                         <input type="text" name="content" placeholder="Type here to add comment..." required>
                         <input type="hidden" name="post" value="${ post._id }">
                         <input type="submit" value="Add Comment">
                     </form>
+
+                    <% }%>
 
                         <div class="post-comments-list">
                             <ul id="post-comments-${ post._id  }">
@@ -80,6 +85,8 @@
             </div>
         </li>`)
     }
+
+    createPost();
 
     //method to delete a post from DOM
     let deletePost = function(deleteLink)
