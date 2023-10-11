@@ -20,7 +20,7 @@
 
                     //enable the functionality of the toggle like button on the new post
 
-                    new toggleLike($('.toggle-like-button', newPost));
+                    new toggleLike($(' .toggle-like-button', newPost));
 
                     new Noty
                     ({
