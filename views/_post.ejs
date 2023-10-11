@@ -5,15 +5,24 @@
             <small class="small-delete">
                 <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
             </small>
+        <% } %> 
+        <div class="post-user">
+            <% if(locals.user){%>
+                <div><img src="<%= user.avatar %>" alt="<%= user.name %>" width="100"></div>
             <% } %>
-                <%= post.content %>
-                    <br>
-                    <small class="small-text">
-                        <%= post.user.name %>
-                    </small>
-
-                    <br>
+            <span>
+                <p class="post-user-name">
+                    <%= post.user.name %>
+                </p>
+                <p class="post-timing">Timing of Post</p>
+            </span>
+        </div>
+        
+        <p class="post-content">
+            <%= post.content %>
+        </p>
                     <small>
+                        <i class="fa-solid fa-heart"></i>
                         <% if(locals.user) { %>
                             <a class="toggle-like-button" data-likes="<%= post.likes.length %>"
                                 href="/likes/toggle/?id=<%=post._id%>&type=Post">
@@ -21,7 +30,7 @@
                             </a>
                             <% } else { %>
                                 <%= post.likes.length %> Likes
-                                    <% } %>
+                            <% } %>
                     </small>
     </p>
     <div class="post-comments">
@@ -30,7 +39,7 @@
             <form action="/comments/create" method="POST" class="comment-form" id="post-<%= post._id %>-comments-form">
                 <input type="text" name="content" placeholder="Type here to add comment..." required>
                 <input type="hidden" name="post" value="<%= post._id %>">
-                <input type="submit" value="Add Comment">
+                <input type="submit" value="Add Comment" style="font-weight:bold; background-color: rgba(128,128,128,0.461);">
             </form>
 
             <% } %>

@@ -5,8 +5,9 @@
 <h1>Social/ UserProfile</h1>
 
 <div class="user-img-box flex">
-
-    <img src="<%= user.avatar %>" alt="<%= user.name %>" width="200">
+    <% if(locals.user){%>
+        <img src="<%= user.avatar %>" alt="<%= user.name %>" width="200">
+    <% } %>
 
 </div>
 
