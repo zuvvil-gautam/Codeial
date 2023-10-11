@@ -9,22 +9,30 @@
             <a href="/comments/destroy/<%= comment.id %>" class="delete-comment-button">X</a>
             </small>
             <% } %>
-
-            <%= comment.content %>
-            <br>
-            <small class="small-text">
-                <%= comment.user.name %>
+        <div class="comment-user">
+            <% if(locals.user){%>
+                <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
+            <% } %>
+            <p>
+                <%= post.user.name %>
+            </p>
+            <p class="comment-timing">comment timing</p>
+            
+            <small>
+                <i class="fa-solid fa-heart"></i>
+                <% if(locals.user){ %>
+                    <a class="toggle-like-button" data-likes="<%= comment.likes.length %>"
+                        href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
+                        <%= comment.likes.length %>
+                    </a>
+                    <% }else{ %>
+                        <%= comment.likes.length %>
+                            <% } %>
             </small>
-                    <br>
-                    <small>
-                        <% if(locals.user) { %>
-                            <a class="toggle-like-button" data-likes="<%= comment.likes.length %>"
-                                href="/likes/toggle/?id=<%=comment._id%>&type=Comment">
-                                <%= comment.likes.length %> Likes
-                            </a>
-                            <% } else { %>
-                                <%= comment.likes.length %> Likes
-                                    <% } %>
-                    </small>
+            </div>
+            
+            <p class="comment-content">
+                <%= comment.content %>
+            </p>
     </p>
 </li>
