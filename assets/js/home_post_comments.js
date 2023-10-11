@@ -64,16 +64,16 @@ class PostComments {
         // Added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
 
         //show the count of zero likes on this comment
-        return $(`<li id="comment-${comment._id}">
-                        <p>
+        return $(`<li id="comment-${comment._id}" class="each-comment">
+                        <p class="each-comment-text">
                             
-                            <small>
+                            <small class="small-delete">
                                 <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
                             </small>
                             
                             ${comment.content}
                             <br>
-                            <small>
+                            <small class="small-text">
                                 ${comment.user.name}
                             </small>
 

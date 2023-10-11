@@ -85,7 +85,7 @@
         </li>`)
     }
 
-    createPost();
+    
 
     //method to delete a post from DOM
     let deletePost = function(deleteLink)
