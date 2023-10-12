@@ -45,24 +45,25 @@
         return $(`<li class="each-post" id="post-${ post._id }">
             <p class="each-post-text">
 
-            <% if (locals.user && locals.user.id == post.user.id) { %>
-                    <small class="small-delete">
-                        <a class="delete-post-button" href="/posts/destroy/${ post._id }">X</a>
-                    </small>
-
-                    <% } %>
-                    
-                        ${ post.content }
-                            <br>
-                            <small class="small-text">
-                                ${ post.user.name }
+                            <small class="small-delete">
+                                <a class="delete-post-button" href="/posts/destroy/${ post._id}" >X</a> 
                             </small>
+                
+                        <div class="post-user">
+                                <div><img src="${user.avatar}" alt="${user.name}" width="100"></div>
+                            <span>
+                                <p> ${post.user.name} </p>
+                                <p class="post-timing">Timing of Post</p>
+                            </span>
+                        </div>
+                        
+                        <p class="post-content">${post.content }</p>
 
-                            <br>
                             <small>
                             <i class="fa-solid fa-heart"></i>
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">0 Likes
+                                <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">${post.likes.length}
                                 </a>
+                                ${post.likes.length}
 
                             </small>
                     
@@ -73,7 +74,7 @@
                     <form id="post-${post._id}-comments-form" action="/comments/create" class="comment-form" method="POST">
                         <input type="text" name="content" placeholder="Type here to add comment..." required>
                         <input type="hidden" name="post" value="${ post._id }">
-                        <input type="submit" value="Add Comment">
+                        <input type="submit" value="Add Comment" style="font-weight:bold; background-color: rgba(128,128,128,0.461);"/>
                     </form>
 
 
