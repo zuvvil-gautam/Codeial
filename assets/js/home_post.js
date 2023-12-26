@@ -46,13 +46,13 @@
             <p class="each-post-text">
 
                             <small class="small-delete">
-                                <a class="delete-post-button" href="/posts/destroy/${ post._id}" >X</a> 
+                                <a class="delete-post-button" href="/posts/destroy/${ post.id}" >X</a> 
                             </small>
                 
                         <div class="post-user">
-                                <div><img src="${user.avatar}" alt="${user.name}" width="100"></div>
+                                <div><img src="${post.user.avatar}" alt="${post.user.name}" width="100"></div>
                             <span>
-                                <p> ${post.user.name} </p>
+                                <p class="post-user-name"> ${post.user.name} </p>
                                 <p class="post-timing">Timing of Post</p>
                             </span>
                         </div>
@@ -61,9 +61,9 @@
 
                             <small>
                             <i class="fa-solid fa-heart"></i>
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">0 Likes
+                                <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">${post.likes.length} Likes
                                 </a>
-                                
+                                ${ post.likes.length } Likes
 
                             </small>
                     
