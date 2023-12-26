@@ -79,11 +79,10 @@ class PostComments {
                             <br>
                             <small>
 
-                            <i class="fa-solid fa-heart"></i>
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">                        <i class="fa-solid fa-heart"></i>
                                 ${comment.likes.length}
-                                </a> 
-                                ${comment.likes.length}
+
+                                </a>
 
                             </small>
                         </div>

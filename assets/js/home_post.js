@@ -60,11 +60,12 @@
                         <p class="post-content">${post.content }</p>
 
                             <small>
-                            <i class="fa-solid fa-heart"></i>
-                                <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">${post.likes.length} Likes
+                            
+                                <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">
+                                <i class="fa-regular fa-heart"></i>
+                                ${post.likes.length} Likes
                                 </a>
-                                ${ post.likes.length } Likes
-
+                                
                             </small>
                     
             </p>

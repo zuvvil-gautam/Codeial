@@ -22,13 +22,14 @@
             <%= post.content %>
         </p>
                     <small>
-                        <i class="fa-solid fa-heart"></i>
                         <% if(locals.user) { %>
                             <a class="toggle-like-button" data-likes="<%= post.likes.length %>"
                                 href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                                <i class="fa-regular fa-heart"></i>
                                 <%= post.likes.length %> Likes
                             </a>
                             <% } else { %>
+                                <i class="fa-regular fa-heart"></i>
                                 <%= post.likes.length %> Likes
                             <% } %>
                     </small>

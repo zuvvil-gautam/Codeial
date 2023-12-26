@@ -22,8 +22,13 @@ class ToggleLike{
                 console.log(likesCount);
                 if(data.data.deleted == true){
                     likesCount-- ;
+                    console.log('- like', likesCount);
+                    $(self).html(`<i class="fa-regular fa-heart"></i> ${likesCount}`);
                 }else{
                     likesCount++;
+                    console.log('+ like', likesCount);
+                    $(self).html(`<i class="fa-solid fa-heart"></i> ${likesCount}`);
+                    
                 }
 
                 $(self).attr('data-likes',likesCount);
