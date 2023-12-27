@@ -8,11 +8,27 @@ body{
     justify-content: center;
     width: 100vw;
     height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 /* common */
 .fa-heart {
     color: red;
+}
+
+/* common section */
+section h3 {
+    padding: .2rem;
+}
+
+section:not(:first-child){
+    flex: 0 0 50%;
+    width: 50%;
+    height: 50vh;
+    width: 45%;
+    border-left: 3px solid lightgray;
+    padding: 10px;
 }
 
 /*section 1*/
@@ -22,6 +38,8 @@ body{
     padding: 10px;
     border-left: 1px solid lightgray;
     height: 100%;
+    flex: 0 0 100%;
+    border: 2px solid red;
 }
 
 .post-form {
@@ -51,12 +69,12 @@ body{
 
 /* section 2 */
 
-#user-friends {
+/* #user-friends {
     margin-left: 2rem;
     width: 20%;
     padding: 10px;
     border-left: 3px solid lightgray;
-}
+} */
 
 #posts-list-container {
     
@@ -67,7 +85,7 @@ body{
 #posts-list-container ul {
     
     /* display: block; */
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
 }
 
@@ -95,10 +113,9 @@ body{
 #user-list>div {
     overflow: auto;
     height: 50vh;
-    border: 2px solid red;
 }
 
-#user-list p {
+#user-list li {
     border: 2px solid green;
     color: black;
     height: 20%;
@@ -115,13 +132,13 @@ body{
     margin-right: .5rem;
 }
 
-#user-list a {
+#user-list .user-list-name {
     color: black;
     font-size: 1rem;
     font-weight: bold;
 }
 
-#user-list button {
+/* #user-list button {
     background-color: rgb(249, 92, 6);
     color: white;
     font-size: .8rem;
@@ -131,4 +148,4 @@ body{
     border: none;
     outline: none;
     border-radius: .3rem;
-}
+} */

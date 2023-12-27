@@ -1,4 +1,9 @@
-        
+
+<!-- Only add variable parts -->
+
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/_friend.css">
+
 <h1> <%= title %></h1>
 
 <div class="home-container">
@@ -14,7 +19,7 @@
     <% } %>
     
     <div id="posts-list-container">
-        <ul>
+        <ul class="flex">
             <% for (post of posts) { %>
                 <%- include('_post')  %>
             <% } %>
@@ -29,16 +34,16 @@
 
 <section id="user-list">
     <h3>Users</h3>
-    <div>
+    <ul>
         <% for (u of all_users) { %>
-            <p>
+            <li>
                 <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
-                <a href="/user/profile/<%= u.id  %>"><%= u.name %></a>
+                <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
 
                 <button type="submit">Add Friend</button>
-            </p>
+            </li>
         <% } %>
-    </div>
+        </ul>
 </section>
 
 </div>
