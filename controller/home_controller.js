@@ -1,6 +1,8 @@
 const Post = require('../models/post');
 const User = require('../models/user');
 
+const friends = require('../models/friendship');
+
 
 module.exports.home = async function (req, res) {
 
