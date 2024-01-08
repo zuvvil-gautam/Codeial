@@ -16,7 +16,7 @@
     height: 90%;
 }
 
-.message {
+.messageBox li {
     margin-bottom: 10px;
     padding: .3rem;
     border: 2px solid brown;
@@ -24,11 +24,11 @@
     font-weight: bold;
 }
 
-.sender {
+.other-message {
     background-color: rgb(236, 149, 152);
 }
 
-.receiver {
+.self-message {
     float: right;
     background-color: rgb(134, 197, 243);
 }
