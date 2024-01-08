@@ -29,7 +29,12 @@
 </section>
 
 <section id="user-friends">
-    <h4>Friends</h4>
+    <h3>Friends</h3>
+    <ul class="flex" id="friend-list">
+        <!-- <img src="" alt="">
+        <a href="">QWERTY</a>
+        <a href="" class="remove-friend">Remove</a> -->
+    </ul>
 </section>
 
 <section id="user-list">
@@ -40,7 +45,9 @@
                 <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
                 <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
 
-                <button type="submit">Add Friend</button>
+                <!-- <button type="submit">Add Friend</button> -->
+
+                <a href="/friends/friendship/request" class="add-friend-btn"><!-- id=<%=u._id%> -->Add Friend</a>
             </li>
         <% } %>
         </ul>
@@ -54,5 +61,13 @@
     $('.toggle-like-button').each(function () {
         let self = this;
         let toggleLike = new ToggleLike(self);
+    });
+</script>
+
+<script src="/js/friend_request.js"></script>
+<script>
+    $('.add-friend-btn').each(function(){
+        let self = this;
+        let addFriend = new AddFriend(self);
     });
 </script>

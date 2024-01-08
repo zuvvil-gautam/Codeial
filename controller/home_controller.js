@@ -28,7 +28,7 @@ module.exports.home = async function (req, res) {
         .populate('likes');
         
         // Fetch all users using a promise
-        let users = await User.find({});
+        let users = await User.find({}).populate('friendships');
         
         
         // Render the home view with the retrieved data

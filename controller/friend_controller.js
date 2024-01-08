@@ -2,9 +2,11 @@ const User = require('../models/user');
 const Friendship = require('../models/friendship');
 
 // Send a friend request
-module.exports.sendFriendRequest = async (request, respond) => {
+module.exports.sendFriendRequest = async function(request, respond) {
     try {
         const { fromUserId, toUserId } = request.body;
+
+        console.log('request',request.body);
 
         // Create a new friendship request
         const friendship = new Friendship({
@@ -26,10 +28,16 @@ module.exports.sendFriendRequest = async (request, respond) => {
         // Save both users using Promise.all for concurrent updates
         await Promise.all([fromUser.save(), toUser.save()]);
 
-        respond.status(200).json({ message: 'Friend request sent successfully' });
-
-    } catch (error) {
-        console.error('Error sending friend request:', error);
-        respond.status(500).json({ error: 'Something went wrong', details: error.toString() });
+        if (request.xhr) {
+            return respond.status(200).json({
+                message: 'Friend request sent successfully',
+                data: {
+                    // fromUser: fromUser,
+                    // toUser: toUser
+                }
+            })
+        }
+    } catch (err) {
+        return respond.status(500).json({ error: 'Something wet wrong' });
     }
-};
+}
