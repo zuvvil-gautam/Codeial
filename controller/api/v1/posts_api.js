@@ -1,5 +1,6 @@
 const Post = require('../../../models/post');
-const Comment = require('../../../models/comment')
+const Comment = require('../../../models/comment');
+const Like = require('../../../models/like');
 
 module.exports.index = async function(req,res){
 
@@ -10,12 +11,15 @@ module.exports.index = async function(req,res){
             path: 'comments',
             populate: {
                 path: 'user'
+            },
+            populate:{ //for comment
+                path: 'likes'
             }
-        });
+        }).populate('likes'); //for post
 
 
     return res.json(200,{
-        message: 'Welcome to the API',
+        message: 'List of Posts',
         posts: posts
     })
 }
@@ -23,6 +27,9 @@ module.exports.index = async function(req,res){
 module.exports.destroy = async function(req,res){
     try{
         let post = await Post.findById(req.params.id);
+
+        await Like.deleteMany({likeable: post, onModel: 'Post'});
+        await Like.deleteMany({_id: {$in: post.comments}});
 
         if(post.user == req.user.id){
             post.deleteOne();
