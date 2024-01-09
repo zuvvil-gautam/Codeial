@@ -81,3 +81,8 @@
     integrity="sha512-Z6C1p1NIexPj5MsVUunW4pg7uMX6/TT3CUVldmjXx2kpip1eZcrAnxIusDxyFIikyM9A61zOVNgvLr/TGudOQg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/chat_engine.js"></script>
+<% if(locals.user){ %>
+    <script>
+        new ChatEngine('chatbox', '<%= locals.user._id %>');
+    </script>
+<% } %>
