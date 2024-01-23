@@ -34,10 +34,10 @@
         <% for(friend of all_friends){ %>
             <li>
                 <img src="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595'%>" alt="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595' %>">
-                <a href="" class="user-friend-name">
-                    <%= friend.to_user && friend.to_user.name ? friend.to_user.name : 'Luffy' %>
+                <a href="<%= friend.to_user ? '/user/profile/' + friend.to_user.id : '#' %> " class="user-friend-name">
+                <%= friend.to_user && friend.to_user.name ? friend.to_user.name : 'Luffy' %>
                 </a>
-                <a href="" class="remove-friend">Remove</a>
+                <a href="" class="remove-friend remove-add-btn">Remove</a>
             </li>
             <% } %>
 
@@ -53,7 +53,7 @@
 
                 
 
-                <a class="add-friend-btn" href="<%= u && u._id ? '/friends/friendship/add?toUser=' + u._id + '&fromUser=' + (locals.user && locals.user._id ? locals.user._id : '') : '#' %>" >
+                <a class="add-friend-btn remove-add-btn" href="<%= u && u._id ? '/friends/friendship/add?toUser=' + u._id + '&fromUser=' + (locals.user && locals.user._id ? locals.user._id : '') : '#' %>" >
                     <!-- /?id=<%=u._id%> -->
                     Add Friend
                 </a>

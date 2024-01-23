@@ -9,7 +9,7 @@ class ChatEngine{
         //this tell go and connect
         //1..
 
-        this.socket= io.connect('http://localhost:5000'); //io-is global variable by socket.io file
+        this.socket= io('http://localhost:5000',{transports:['websocket']}); //io-is global variable by socket.io file
 
 
         if(this.userEmail || this.userName){
