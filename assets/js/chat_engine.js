@@ -47,6 +47,7 @@ class ChatEngine{
                     chatroom:'codeial'
                 });
             }
+            msg.value = '';
         });
 
         self.socket.on('receive_message',function(data){
