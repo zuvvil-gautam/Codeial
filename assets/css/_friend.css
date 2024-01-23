@@ -13,6 +13,7 @@
 
 #user-friends ul {
     font-weight: bold;
+    height: 40vh;
     overflow: auto;
 }
 

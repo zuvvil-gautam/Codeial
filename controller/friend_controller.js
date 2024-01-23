@@ -10,11 +10,14 @@ module.exports.addFriend = async function(request, respond) {
         const fromUserId = request.query.fromUser;
         const toUserId = request.query.toUser;
 
+        let existingFriend = await Friendship.findOne({to_user: toUserId});
+
         // Create a new friendship request
-        const friendship = new Friendship({
-            from_user: fromUserId,
-            to_user: toUserId,
-        });
+        if (!existingFriend) {
+            const friendship = new Friendship({
+                from_user: fromUserId,
+                to_user: toUserId,
+            });
 
         // Save the friendship request
         await friendship.save();
@@ -39,6 +42,10 @@ module.exports.addFriend = async function(request, respond) {
                 }
             })
         }
+    }else{
+        console.log('existing friend');
+        return respond.status(400).json({ message: 'This user is already your friend. Do you want to remove them?' });
+    }
     } catch (err) {
         return respond.status(500).json({ error: 'Something wet wrong' });
     }
