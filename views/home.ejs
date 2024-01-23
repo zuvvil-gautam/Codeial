@@ -30,11 +30,17 @@
 
 <section id="user-friends">
     <h3>Friends</h3>
-    <ul class="flex" id="friend-list">
-        <!-- <img src="" alt="">
-        <a href="">QWERTY</a>
-        <a href="" class="remove-friend">Remove</a> -->
-    </ul>
+    <ul id="friend-list">
+        <% for(friend of all_friends){ %>
+            <li>
+                <img src="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595'%>" alt="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595' %>">
+                <a href="" class="user-friend-name">
+                    <%= friend.to_user && friend.to_user.name ? friend.to_user.name : 'Luffy' %>
+                </a>
+                <a href="" class="remove-friend">Remove</a>
+            </li>
+            <% } %>
+
 </section>
 
 <section id="user-list">
@@ -45,9 +51,12 @@
                 <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
                 <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
 
-                <!-- <button type="submit">Add Friend</button> -->
+                
 
-                <a href="/friends/friendship/request" class="add-friend-btn"><!-- id=<%=u._id%> -->Add Friend</a>
+                <a class="add-friend-btn" href="<%= u && u._id ? '/friends/friendship/add?toUser=' + u._id + '&fromUser=' + (locals.user && locals.user._id ? locals.user._id : '') : '#' %>" >
+                    <!-- /?id=<%=u._id%> -->
+                    Add Friend
+                </a>
             </li>
         <% } %>
         </ul>

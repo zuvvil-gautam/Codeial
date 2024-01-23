@@ -14,7 +14,9 @@ module.exports.create = async function (req, res) {
 
 
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it! (To display the user's name with the post added dynamically)
-            post = await Post.findById(post._id).populate('user', 'name avatar').exec();
+
+            post = await post.populate('user', 'name avatar');
+            // post = await Post.findById(post._id).populate('user', 'name avatar').exec();
 
             return res.status(200).json({
                 data: {

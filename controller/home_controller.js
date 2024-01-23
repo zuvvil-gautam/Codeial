@@ -1,3 +1,4 @@
+const Friendship = require('../models/friendship');
 const Post = require('../models/post');
 const User = require('../models/user');
 
@@ -28,15 +29,23 @@ module.exports.home = async function (req, res) {
         .populate('likes');
         
         // Fetch all users using a promise
-        let users = await User.find({}).populate('friendships');
-        
+        let users = await User.find({});
+
+        let friendlist = await Friendship.find({}).populate({
+            path: 'to_user',
+            populate:{
+                path:'name'
+            }
+        })
+
+        //console.log('user friends:: ', friendlist[0].to_user);
         
         // Render the home view with the retrieved data
         return res.render('home', {
             title: "Codeial | Home",
             posts: posts,
             all_users: users,
-            friends: friends
+            all_friends: friendlist
         });
     } catch(err){
         console.log("Error:", err);
