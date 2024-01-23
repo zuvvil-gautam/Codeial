@@ -32,12 +32,12 @@
     <h3>Friends</h3>
     <ul id="friend-list">
         <% for(friend of all_friends){ %>
-            <li>
+            <li id="friend-<%= friend.id %>">
                 <img src="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595'%>" alt="<%= friend.to_user && friend.to_user.avatar ? friend.to_user.avatar : '/uploads/users/avatars/avatar-1692517651595' %>">
                 <a href="<%= friend.to_user ? '/user/profile/' + friend.to_user.id : '#' %> " class="user-friend-name">
                 <%= friend.to_user && friend.to_user.name ? friend.to_user.name : 'Luffy' %>
                 </a>
-                <a href="" class="remove-friend remove-add-btn">Remove</a>
+                <a href="/friends/friendship/remove/<%= friend.id %>" class="remove-friend remove-add-btn">Remove</a>
             </li>
             <% } %>
 
@@ -76,12 +76,12 @@
 </script>
 
 <script src="/js/friend_request.js"></script>
-<script>
+<!--<script>
     $('.add-friend-btn').each(function(){
         let self = this;
         let addFriend = new AddFriend(self);
     });
-</script>
+</script> -->
 
 
  <!-- socket.io link -->
