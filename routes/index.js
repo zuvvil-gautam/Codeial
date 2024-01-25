@@ -15,6 +15,8 @@ router.use('/likes', require('./likes'));
 
 router.use('/friends', require('./friends'));
 
+router.use('/forgotPassword', require('./forgotPassword'));
+
 router.use('/api', require('./api'));
 
 // for any further routes, access from here
