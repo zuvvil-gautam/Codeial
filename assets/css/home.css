@@ -26,6 +26,7 @@ body{
 /* common section */
 section h3 {
     padding: .2rem;
+    text-decoration: underline;
 }
 
 section:not(:first-child){
