@@ -14,7 +14,9 @@
                 <p class="post-user-name">
                     <%= post.user.name %>
                 </p>
-                <p class="post-timing">Timing of Post</p>
+                <p class="post-timing"><%= post.createdAt.toLocaleDateString() %></p>
+                
+                </p>
             </span>
         </div>
         

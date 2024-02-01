@@ -20,7 +20,7 @@ module.exports.toggleLike = async function(req,res){
         let existingLike = await Like.findOne({
             likeable: req.query.id,
             onModel: req.query.type,
-            user: req.user._id
+            user: req.user.id
         });
 
         //if a like already exists then delete it
