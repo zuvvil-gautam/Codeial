@@ -47,10 +47,10 @@
     <h3>Users</h3>
     <ul>
         <% for (u of all_users) { %>
-            <% if(u._id != locals.user._id){ %>
+            <% if( locals.user && u.id !== locals.user.id){ %>
                 <li>
                     <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
-                    <a class="user-list-name" href="/user/profile/<%= u._id  %>"><%= u.name %></a>
+                    <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
 
                     
 
