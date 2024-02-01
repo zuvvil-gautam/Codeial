@@ -10,6 +10,8 @@ module.exports.home = async function (req, res) {
     try{
 
         // Populate the user of each post and its comments using promises
+        const loggedInUserId = request.user;
+
         let posts = await Post.find({})
         .sort('-createdAt')
         .populate('user')
@@ -31,7 +33,8 @@ module.exports.home = async function (req, res) {
         // Fetch all users using a promise
         let users = await User.find({});
 
-        let friendlist = await Friendship.find({}).populate({
+        let friendlist = await Friendship.find({from_user: loggedInUserId})
+        .populate({
             path: 'to_user',
             populate:{
                 path:'name'
