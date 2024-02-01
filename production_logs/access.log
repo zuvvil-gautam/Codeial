@@ -81,3 +81,6 @@
 ::1 - - [01/Feb/2024:07:24:44 +0000] "GET /css/_post.css HTTP/1.1" 404 152 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [01/Feb/2024:07:24:44 +0000] "GET /css/_comment.css HTTP/1.1" 404 155 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [01/Feb/2024:07:24:44 +0000] "GET /css/_chat.css HTTP/1.1" 404 152 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [01/Feb/2024:07:48:17 +0000] "GET / HTTP/1.1" 500 2317 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [01/Feb/2024:07:48:44 +0000] "GET / HTTP/1.1" 500 2320 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::ffff:127.0.0.1 - - [01/Feb/2024:07:49:00 +0000] "GET / HTTP/1.1" 500 2320 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

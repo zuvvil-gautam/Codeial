@@ -47,17 +47,19 @@
     <h3>Users</h3>
     <ul>
         <% for (u of all_users) { %>
-            <li>
-                <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
-                <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
+            <% if(u.id != locals.user.id){ %>
+                <li>
+                    <img src="<%= u.avatar %>" alt="<%= u.name %>" width="100"></img>
+                    <a class="user-list-name" href="/user/profile/<%= u.id  %>"><%= u.name %></a>
 
-                
+                    
 
-                <a class="add-friend-btn remove-add-btn" href="/friends/friendship/add/?toUser=<%= u._id %>
-                    <!-- /?id=<%=u._id%> -->
-                    Add Friend
-                </a>
-            </li>
+                    <a class="add-friend-btn remove-add-btn" href="/friends/friendship/add/?toUser=<%= u._id %>
+                        <!-- /?id=<%=u._id%> -->
+                        Add Friend
+                    </a>
+                </li>
+            <% } %>
         <% } %>
         </ul>
 </section>
