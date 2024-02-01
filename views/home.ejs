@@ -53,7 +53,7 @@
 
                 
 
-                <a class="add-friend-btn remove-add-btn" href="<%= u && u._id ? '/friends/friendship/add?toUser=' + u._id + '&fromUser=' + (locals.user && locals.user._id ? locals.user._id : '') : '#' %>" >
+                <a class="add-friend-btn remove-add-btn" href="/friends/friendship/add/?toUser=<%= u._id %>
                     <!-- /?id=<%=u._id%> -->
                     Add Friend
                 </a>
