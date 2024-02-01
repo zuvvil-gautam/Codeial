@@ -5,7 +5,11 @@
     <form action="/user/create-session" class="form" method="POST">
         <h1>User | Sign In</h1>
         <input type="email" required placeholder="Email" name="email">
-        <input type="password" required placeholder="Password" name="password">
+
+        <span class="pswdBox">
+            <input type="password" name="password" placeholder="Password" id="signInPswd" required />
+            <button onclick="togglePassword('signInPswd')"><i class="fa-regular fa-eye-slash"></i></button>
+        </span>
         
         <p class="forgotPswd">
             <a href="/forgotPassword/forgot-password">Forgot Password?</a>
@@ -22,3 +26,5 @@
     
 
 </div>
+
+<script src="/js/pswd-hideShow-toggler.js"></script>
