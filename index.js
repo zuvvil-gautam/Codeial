@@ -16,7 +16,7 @@ const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
 const app = express();
-
+require('./config/view-helper')(app);
 const port = 8000;
 
 const expressLayouts = require('express-ejs-layouts');
