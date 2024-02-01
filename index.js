@@ -38,12 +38,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //for static files such as css,js
 app.use(express.static(__dirname + env.asset_path));
+app.use(express.static(__dirname + '/public/assets'));
 
 //make the upload path available to browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(logger(env.morgan.mode, env.morgan.options))
-//app.use(expressLayouts);
+app.use(expressLayouts);
 
 //extract style and scripts from sub pages into the layout
 app.set('layout extractStyles',true);

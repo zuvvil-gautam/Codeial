@@ -63,7 +63,7 @@ gulp.task('default', gulp.series('build'));
 //     done();
 // });
 
-// empty the public/assets directory
+// // empty the public/assets directory
 // gulp.task('clean:assets', function(done){
 //     del.sync('./public/assets');
 //     done();
