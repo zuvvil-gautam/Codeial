@@ -61,6 +61,9 @@ class PostComments {
 
 
     newCommentDom(comment) {
+        let Time = new PostCommentTime(post.createdAt);
+        let commentTime = Time.getTimeAgo(post.createdAt);
+        console.log(commentTime);
         // Added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
 
         //show the count of zero likes on this comment
@@ -74,7 +77,7 @@ class PostComments {
                         <div class="comment-user">
                             <img src="${ comment.user.avatar}" alt="${comment.user.name}" width="100">
                             <p class="comment-user-name"> ${comment.user.name } </p>
-                            <p class="comment-timing">comment timing</p>
+                            <p class="comment-timing">${commentTime}</p>
 
                             <br>
                             <small>
